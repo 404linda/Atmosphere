@@ -1,11 +1,12 @@
 import { BskyAgent } from '@atproto/api';
 
-export let agent;
+export const agent = new BskyAgent({
+  service: 'https://bsky.social'
+});
 
-export function createAgent(useGhost = false) {
-  agent = new BskyAgent({
-    service: useGhost
-      ? 'https://bsky.social' // you can proxy later
-      : 'https://bsky.social'
+export async function login(handle, password) {
+  return agent.login({
+    identifier: handle,
+    password
   });
 }
